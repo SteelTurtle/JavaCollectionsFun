@@ -1,4 +1,4 @@
-package org.gorillacorp.grid;
+package org.gorillacorp.gridfiller;
 
 public class Element {
 

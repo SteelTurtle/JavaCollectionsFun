@@ -1,6 +1,4 @@
-package org.gorillacorp.main;
-
-import org.gorillacorp.grid.Grid;
+package org.gorillacorp.gridfiller;
 
 public class MainApp {
 
