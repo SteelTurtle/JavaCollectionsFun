@@ -27,6 +27,12 @@ public class Grid {
 	public boolean fillEmptyElementInGrid(String desiredElementPosition) {
 		Element chosenElement = null;
 		for (Element element : elements) {
+			// Visually track with the "*" symbol the number of elements we traverse before
+			// we reach our target.
+			// Guess what, an ArrayList is not exactly the best choice to perform searches
+			// of random elements in
+			// big collections of elements
+			System.out.println("*");
 			if (element.getElementPosition().equals(desiredElementPosition)) {
 				chosenElement = element;
 				break;
