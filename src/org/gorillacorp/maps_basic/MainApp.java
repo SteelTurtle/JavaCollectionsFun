@@ -14,6 +14,7 @@ public class MainApp {
 		stringMap.put("beta", "description for beta");
 		stringMap.put("gamma", "description for gamma");
 		stringMap.put("delta", "description for delta");
+		stringMap.put("theta", "description for theta");
 
 		// The following statement will print "null". You cannot stack together the
 		// initialization & assignment operations of
@@ -37,6 +38,16 @@ public class MainApp {
 		for (String key : stringMap.keySet()) {
 			System.out.println(key + " : " + stringMap.get(key));
 		}
+		
+		// Replace a key and its exact value in a map with another value. The value
+		// being replaced must of course match the original one. Notice also that in Java
+		// a key does not have to be necessarily an immutable object (e.g. a String in this case)
+		if(stringMap.replace("theta", "description for theta", "NEW description for theta")) {
+			System.out.println("The value of theta has been replaced");
+		} else {
+			System.out.println("Could not replace the value for theta.");
+		}
+		
 	}
 
 }
