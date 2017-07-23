@@ -45,26 +45,22 @@ public class MainApp {
 		// factory methods
 		// but, hey, this is Java8....
 		locations.get(1).addNewPassage("E", 2);
-		locations.get(1).addNewPassage("Q", 0);
 
 		locations.get(2).addNewPassage("E", 3);
-		locations.get(2).addNewPassage("Q", 0);
 
 		locations.get(3).addNewPassage("N", 4);
 		locations.get(3).addNewPassage("W", 6);
-		locations.get(3).addNewPassage("Q", 0);
 
 		locations.get(4).addNewPassage("N", 5);
 		locations.get(4).addNewPassage("E", 6);
 		locations.get(4).addNewPassage("Q", 0);
 
-		locations.get(5).addNewPassage("Q", 0);
+		// No need to specify the behavior of location 5 because, well, you are dead...
 
 		locations.get(6).addNewPassage("E", 2);
 		locations.get(6).addNewPassage("W", 3);
 		locations.get(6).addNewPassage("N", 3);
 		locations.get(6).addNewPassage("S", 2);
-		locations.get(6).addNewPassage("Q", 0);
 
 		// track user position
 		int positionOnMap = 1;
@@ -80,7 +76,7 @@ public class MainApp {
 				scanner.close();
 				break;
 			}
-			// build a map consisting in a sub-set of all the possible directions that we
+			// build a map consisting of a sub-set of all the possible directions that we
 			// could head to, given the position we currently are.
 			Map<String, Integer> locationExits = locations.get(positionOnMap).getPassages();
 			System.out.println("The available passages from this position are: ");

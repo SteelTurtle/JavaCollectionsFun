@@ -9,11 +9,14 @@ public class Location {
 	private final String description;
 	private final Map<String, Integer> passages;
 
-	// constructors
+	// constructor
 	public Location(int locationId, String description) {
 		this.locationId = locationId;
 		this.description = description;
 		this.passages = new HashMap<>();
+		// Pressing 'Q' during the game is always going to quit the program, no matter the position
+		// on the map we are in. So, let'add this behavior in the constructor
+		this.passages.put("Q", 0);
 	}
 
 	// getters
