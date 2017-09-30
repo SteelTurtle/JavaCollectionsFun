@@ -1,6 +1,6 @@
 package org.gorillacorp.gridfiller_binarysearch;
 
-// Implementing the Comparable interface is necessary every time the object class is going to be part of a Set
+// By the way, Implementing the Comparable interface is necessary every time the object class is going to be part of a Set
 public class Element implements Comparable<Element> {
 
 	private final String elementPosition;
