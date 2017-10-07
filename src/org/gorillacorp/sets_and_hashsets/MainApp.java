@@ -8,50 +8,50 @@ import java.util.Set;
 public class MainApp {
 
 	/*
-	 * Dead-Simple example of concurrent use of Sets and Maps
+	 * Example of use of Sets and Maps
 	 */
-	private static Map<String, HeavenlyBody> solarSystem = new HashMap<>();
+	private static Map<HeavenlyBody.Key, HeavenlyBody> solarSystem = new HashMap<>();
 	private static Set<HeavenlyBody> planets = new HashSet<>();
 
 	public static void main(String[] args) {
 
-		HeavenlyBody mercury = new HeavenlyBody("Mercury", 88);
-		solarSystem.put(mercury.getName(), mercury);
+		HeavenlyBody mercury = new Planet("Mercury", 88);
+		solarSystem.put(mercury.getKey(), mercury);
 		planets.add(mercury);
 
-		HeavenlyBody earth = new HeavenlyBody("Earth", 365);
-		solarSystem.put(earth.getName(), earth);
+		HeavenlyBody earth = new Planet("Earth", 365);
+		solarSystem.put(earth.getKey(), earth);
 		planets.add(earth);
 
-		HeavenlyBody venus = new HeavenlyBody("Venus", 225);
-		solarSystem.put(venus.getName(), venus);
+		HeavenlyBody venus = new Planet("Venus", 225);
+		solarSystem.put(venus.getKey(), venus);
 		planets.add(venus);
 
-		HeavenlyBody mars = new HeavenlyBody("Mars", 225);
-		solarSystem.put(mars.getName(), mars);
+		HeavenlyBody mars = new Planet("Mars", 225);
+		solarSystem.put(mars.getKey(), mars);
 		planets.add(mars);
 
 		// add moons to planets
-		HeavenlyBody earthMoon = new HeavenlyBody("Moon", 27);
-		solarSystem.put(earthMoon.getName(), earthMoon);
-		earth.addMoon(earthMoon);
+		HeavenlyBody earthMoon = new Moon("Moon", 27);
+		solarSystem.put(earthMoon.getKey(), earthMoon);
+		earth.addSatellite(earthMoon);
 
-		HeavenlyBody deimos = new HeavenlyBody("Deimos", 67);
-		HeavenlyBody phobos = new HeavenlyBody("Phobos", 45);
-		solarSystem.put(deimos.getName(), deimos);
-		solarSystem.put(phobos.getName(), phobos);
-		mars.addMoon(deimos);
-		mars.addMoon(phobos);
+		HeavenlyBody deimos = new Moon("Deimos", 67);
+		HeavenlyBody phobos = new Moon("Phobos", 45);
+		solarSystem.put(deimos.getKey(), deimos);
+		solarSystem.put(phobos.getKey(), phobos);
+		mars.addSatellite(deimos);
+		mars.addSatellite(phobos);
 
 		System.out.println("Planets: ");
 		for (HeavenlyBody planet : planets) {
-			System.out.println("\t" + planet.getName());
+			System.out.println("\t" + planet.getKey());
 		}
-
-		HeavenlyBody body1 = solarSystem.get("Earth");
-		System.out.println("Moons of " + body1.getName());
+		
+		HeavenlyBody body1 = solarSystem.get(HeavenlyBody.makeKey("Mars", HeavenlyBody.BodyTypes.PLANET));
+		System.out.println("Moons of " + body1.getKey());
 		for (HeavenlyBody moon : body1.getSatellites()) {
-			System.out.println("\t" + moon.getName());
+			System.out.println("\t" + moon.getKey());
 		}
 
 		// Union of Sets
@@ -62,7 +62,7 @@ public class MainApp {
 		System.out.println(
 				"List of all moons in the (lazy version) of the solar system:");
 		for (HeavenlyBody moon : moonsUnion) {
-			System.out.println("\t" + moon.getName());
+			System.out.println("\t" + moon.getKey());
 		}
 
 	}
