@@ -6,6 +6,8 @@ import java.util.Set;
 public abstract class HeavenlyBody {
 
 	// Multi-valued Key to be used as a Map key
+	// This way we can add to the map objects partially identical, without being
+	// constrained by the "String" equality
 	private final Key key;
 	private final double revolutionPeriod;
 	private final Set<HeavenlyBody> satellites;
