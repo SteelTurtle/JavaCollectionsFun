@@ -54,7 +54,7 @@ public class MainApp {
 			System.out.println("\t" + moon.getName());
 		}
 
-		// Sets Union
+		// Union of Sets
 		Set<HeavenlyBody> moonsUnion = new HashSet<>();
 		for (HeavenlyBody planet : planets) {
 			moonsUnion.addAll(planet.getSatellites());
