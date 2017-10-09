@@ -27,13 +27,9 @@ public class Grocery implements Comparable<Grocery> {
 			this.price = price;
 		}
 	}
-	
+
 	public int getQuantityInStock() {
 		return quantityInStock;
-	}
-
-	public void setQuantityInStock(int quantityInStock) {
-		this.quantityInStock = quantityInStock;
 	}
 
 	public String getName() {
@@ -42,7 +38,7 @@ public class Grocery implements Comparable<Grocery> {
 
 	public void refurnishStock(int quantity) {
 		// let's first validate the quantity...
-		int newQuantity = this.quantityInStock += quantity;
+		int newQuantity = this.quantityInStock + quantity;
 		if (newQuantity >= 0) {
 			this.quantityInStock = newQuantity;
 		}
@@ -80,8 +76,7 @@ public class Grocery implements Comparable<Grocery> {
 
 	@Override
 	public String toString() {
-		return "Grocery [name=" + name + ", price=" + price
-				+ ", quantityInStock=" + quantityInStock + "]";
+		return this.name + " : price " + this.price;
 	}
 
 }
