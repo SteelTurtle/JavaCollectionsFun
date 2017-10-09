@@ -43,11 +43,17 @@ public class MainApp {
 		sellGroceries(bubbaShoppingBasket, "cauliflower", 1);
 		sellGroceries(bubbaShoppingBasket, "beans", 12);
 		sellGroceries(bubbaShoppingBasket, "potato", 12);
-		
+
+		// Ideally, we should always check that we aren't out of stock already,
+		// when trying to sell a grocery. For example:
+		/*if(sellGroceries(bubbaShoppingBasket, "potato", 1) != 1) {
+			System.out.println("No more potatoes in stock.");
+		}*/
+
 		System.out.println(
 				"\nOh, a customer has come!. He fills his basket with some groceries!");
 		System.out.println(bubbaShoppingBasket);
-		
+
 		System.out.println("\nRemaining items in stock: ");
 		System.out.println(groceries);
 
