@@ -1,5 +1,7 @@
 package org.gorillacorp.sorted_collections;
 
+import java.util.Map;
+
 public class MainApp {
 
 	private static GroceryList groceries = new GroceryList();
@@ -28,6 +30,7 @@ public class MainApp {
 		groceries.addStock(temp);
 
 		System.out.println(groceries);
+		
 
 		/*
 		 * for(String s : groceries.getGroceries().keySet()) {

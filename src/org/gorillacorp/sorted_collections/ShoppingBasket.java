@@ -12,6 +12,8 @@ public class ShoppingBasket {
 
 	public ShoppingBasket(String name) {
 		this.name = name;
+		// let's sort each item in the shopping list according to the Grocery's
+		// compareTo() method. This is how a TreeMap works, by the way :)
 		this.shoppingList = new TreeMap<>();
 	}
 
@@ -19,7 +21,8 @@ public class ShoppingBasket {
 		if ((grocery != null) && quantity > 0) {
 			// return the number of specific groceries in the basket, otherwise
 			// return 0.
-			int numberOfGroceriesInBasket = shoppingList.getOrDefault(grocery, 0);
+			int numberOfGroceriesInBasket = shoppingList.getOrDefault(grocery,
+					0);
 			shoppingList.put(grocery, numberOfGroceriesInBasket + quantity);
 		}
 		return 0;

@@ -68,7 +68,7 @@ public class Grocery implements Comparable<Grocery> {
 		}
 		if (o != null) {
 			// use the pre-existing String compareTo() method
-			return this.name.compareTo(o.name);
+			return this.name.compareTo(o.getName());
 		}
 		// else "o" is null. Die! Turn into dust, monster!
 		throw new NullPointerException();

@@ -21,8 +21,32 @@ public class GroceryList {
 
 	public Map<String, Grocery> getGroceries() {
 		// return an unmodifiable view of the Map<K, V> of groceries
+		// REMEMBER, that the collection is unmodifiable, not the objects it
+		// references
 		return Collections.unmodifiableMap(groceries);
 	}
+
+	// What if we want part of the element(s) in the map to be unmodifiable?
+	// (Consider for example a thread-safe scenario, or security enforcement for
+	// the object access, etc.).
+	// In that case, we can encapsulate the data we want to "protect" into an
+	// ad-hoc Map.
+	// Suppose -as an example- we want to avoid the caller in the MainApp to get
+	// a grocery list (getGroceries().getGroceryInList(g)) and then assign an
+	// arbitrary price
+	// to the returned grocery...
+	/*public Map<String, Double> getGroceryPriceList() {
+		Map<String, Double> pricesMap = new LinkedHashMap<>();
+		for (Map.Entry<String, Grocery> p : groceries.entrySet()) {
+			pricesMap.put(p.getKey(), p.getValue().getPrice());
+		}
+		return Collections.unmodifiableMap(pricesMap);
+	}*/
+	// Then, in the caller class (MainApp) we could iterate the grocery list this way:
+	/*for(Map.Entry<String, Double> price : groceries.getGroceryPriceList().entrySet()) {
+		System.out.println(price.getKey() + " has a nominal cost of " + price.getValue());
+	}*/
+	
 
 	public int addStock(Grocery grocery) {
 		if (grocery != null) {
