@@ -35,18 +35,21 @@ public class GroceryList {
 	// a grocery list (getGroceries().getGroceryInList(g)) and then assign an
 	// arbitrary price
 	// to the returned grocery...
-	/*public Map<String, Double> getGroceryPriceList() {
-		Map<String, Double> pricesMap = new LinkedHashMap<>();
-		for (Map.Entry<String, Grocery> p : groceries.entrySet()) {
-			pricesMap.put(p.getKey(), p.getValue().getPrice());
-		}
-		return Collections.unmodifiableMap(pricesMap);
-	}*/
-	// Then, in the caller class (MainApp) we could iterate the grocery list this way:
-	/*for(Map.Entry<String, Double> price : groceries.getGroceryPriceList().entrySet()) {
-		System.out.println(price.getKey() + " has a nominal cost of " + price.getValue());
-	}*/
-	
+	/*
+	 * public Map<String, Double> getGroceryPriceList() { Map<String, Double>
+	 * pricesMap = new LinkedHashMap<>(); for (Map.Entry<String, Grocery> p :
+	 * groceries.entrySet()) { pricesMap.put(p.getKey(),
+	 * p.getValue().getPrice()); } return
+	 * Collections.unmodifiableMap(pricesMap); }
+	 */
+	// Then, in the caller class (MainApp) we could iterate the grocery list
+	// this way:
+	/*
+	 * for(Map.Entry<String, Double> price :
+	 * groceries.getGroceryPriceList().entrySet()) {
+	 * System.out.println(price.getKey() + " has a nominal cost of " +
+	 * price.getValue()); }
+	 */
 
 	public int addStock(Grocery grocery) {
 		if (grocery != null) {
@@ -59,7 +62,7 @@ public class GroceryList {
 			// the Grocery equals() method,
 			// groceries are compared by heir name.
 			if (groceryInStock != grocery) {
-				grocery.refurnishStock(groceryInStock.getQuantityInStock());
+				grocery.adjustStock(groceryInStock.getQuantityInStock());
 			}
 			// put the grocery in the list (overwrite the grocery if it already
 			// exists).
@@ -70,16 +73,29 @@ public class GroceryList {
 		return 0;
 	}
 
-	public int sellStock(String grocery, int quantityToSell) {
-		// get the grocery to sell from the groceries map, or null otherwise
-		Grocery groceryInStock = groceries.getOrDefault(grocery, null);
-		if ((groceryInStock != null)
-				&& (groceryInStock.getQuantityInStock() >= quantityToSell)
-				&& (quantityToSell > 0)) {
-			groceryInStock.refurnishStock(-quantityToSell);
-			return quantityToSell;
+	public int reserveStock(String groceryName, int quantityToReserve) {
+		Grocery groceryInStock = groceries.get(groceryName);
+		if ((groceryInStock != null) && (quantityToReserve > 0)) {
+			return groceryInStock.reserveGroceries(quantityToReserve);
 		}
-		// default: one or more of the tests above did not pass
+		return 0;
+	}
+
+	public int unreserveStock(String groceryName, int quantityToUnReserve) {
+		Grocery groceryInStock = groceries.get(groceryName);
+		if ((groceryInStock != null) && (quantityToUnReserve > 0)) {
+			return groceryInStock.unreserveGroceries(quantityToUnReserve);
+		}
+		return 0;
+	}
+
+	public int sellStock(String grocery, int quantityToSell) {
+		// get the grocery to sell from the groceries map
+		Grocery groceryInStock = groceries.get(grocery);
+		if ((groceryInStock != null) && (quantityToSell > 0)) {
+			return groceryInStock.checkOutReservedGroceries(quantityToSell);
+		}
+		// default:
 		return 0;
 	}
 

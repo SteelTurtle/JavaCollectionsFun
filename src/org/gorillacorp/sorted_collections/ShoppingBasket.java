@@ -17,15 +17,39 @@ public class ShoppingBasket {
 		this.shoppingList = new TreeMap<>();
 	}
 
-	public int addGroceryToBasket(Grocery grocery, int quantity) {
-		if ((grocery != null) && quantity > 0) {
+	public int addGroceryToBasket(Grocery grocery, int quantityToAdd) {
+		if ((grocery != null) && quantityToAdd > 0) {
 			// return the number of specific groceries in the basket, otherwise
 			// return 0.
 			int numberOfGroceriesInBasket = shoppingList.getOrDefault(grocery,
 					0);
-			shoppingList.put(grocery, numberOfGroceriesInBasket + quantity);
+			shoppingList.put(grocery,
+					numberOfGroceriesInBasket + quantityToAdd);
 		}
 		return 0;
+	}
+
+	public int removeGroceryFromBasket(Grocery grocery, int quantityToRemove) {
+		if ((grocery != null) && quantityToRemove > 0) {
+			// if grocery is already in the basket, recalculate the quantity...
+			int numberOfGroceriesInBasket = shoppingList.getOrDefault(grocery,
+					0);
+			int newQuantity = numberOfGroceriesInBasket - quantityToRemove;
+			if (newQuantity > 0) {
+				shoppingList.put(grocery, newQuantity);
+				return quantityToRemove;
+			} else if (newQuantity == 0) {
+				shoppingList.remove(grocery);
+				return quantityToRemove;				
+			}
+		}
+		//default:
+		return 0;
+
+	}
+	
+	public void emptyBasket() {
+		this.shoppingList.clear();
 	}
 
 	public Map<Grocery, Integer> getGroceries() {

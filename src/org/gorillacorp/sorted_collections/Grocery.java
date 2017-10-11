@@ -4,6 +4,7 @@ public class Grocery implements Comparable<Grocery> {
 	private final String name;
 	private double price;
 	private int quantityInStock;
+	private int quantityReserved = 0;
 
 	// constructors
 	public Grocery(String name, double price) {
@@ -22,21 +23,51 @@ public class Grocery implements Comparable<Grocery> {
 		return price;
 	}
 
+	// setPrice could actually be removed for this program, as it is not used
 	public void setPrice(double price) {
 		if (price > 0.0) {
 			this.price = price;
 		}
 	}
 
+	// customers should not be able to reserve more groceries than those
+	// available in stock
 	public int getQuantityInStock() {
-		return quantityInStock;
+		return quantityInStock - quantityReserved;
+	}
+
+	public int reserveGroceries(int groceriesToReserve) {
+		if (groceriesToReserve <= getQuantityInStock()) {
+			this.quantityReserved += groceriesToReserve;
+			return groceriesToReserve;
+		}
+		return 0;
+	}
+
+	public int unreserveGroceries(int quantityToUnreserve) {
+		if (quantityToUnreserve <= quantityReserved) {
+			this.quantityReserved -= quantityToUnreserve;
+			return quantityToUnreserve;
+		}
+		return 0;
+	}
+
+	// checkout quantities in the shopping basket and adjust the groceries'
+	// quantity in stock (and clear the shopping basket of course)
+	public int checkOutReservedGroceries(int quantityCheckedOut) {
+		if (quantityCheckedOut <= quantityReserved) {
+			this.quantityInStock -= quantityCheckedOut;
+			this.quantityReserved -= quantityCheckedOut;
+			return quantityCheckedOut;
+		}
+		return 0;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void refurnishStock(int quantity) {
+	public void adjustStock(int quantity) {
 		// let's first validate the quantity...
 		int newQuantity = this.quantityInStock + quantity;
 		if (newQuantity >= 0) {
@@ -76,7 +107,9 @@ public class Grocery implements Comparable<Grocery> {
 
 	@Override
 	public String toString() {
-		return this.name + " : price " + this.price;
+		return this.name + " : price " + this.price
+				+ ". Reserved grocery items in the shopping basket: "
+				+ this.quantityReserved;
 	}
 
 }
